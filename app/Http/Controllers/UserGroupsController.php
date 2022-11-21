@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserGroupsController extends Controller
 {
@@ -27,7 +28,7 @@ class UserGroupsController extends Controller
      */
     public function create()
     {
-        //
+        return view('groups.create');
     }
 
     /**
@@ -38,7 +39,12 @@ class UserGroupsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formData = $request->all();
+        if (Group::create($formData)) {
+            Session::flash('message', 'Group Created Successfully');
+        }
+
+        return redirect()->to('groups');
     }
 
     /**
@@ -83,6 +89,11 @@ class UserGroupsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        if (Group::find($id)->delete()) {
+            Session::flash('message', 'Group Deleted Successfully');
+        }
+
+        return redirect()->to('groups');
     }
 }

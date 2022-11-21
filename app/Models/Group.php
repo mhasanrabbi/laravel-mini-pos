@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
+
+    public $fillable = ['title'];
 }

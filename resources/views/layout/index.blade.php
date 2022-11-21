@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
 
 
     @stack('styles')
@@ -54,10 +55,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -311,6 +309,12 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    @if(session('message'))
+                        <div class="alert alert-primary" role="alert">
+                            {{ session('message')}}
+                        </div>
+                    @endif
 
                     @yield('content')
 

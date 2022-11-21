@@ -8,6 +8,17 @@
 
 @section('content')
 
+
+    <div class="row clearfix page__header">
+        <div class="col-md-6">
+            <h4>User Groups</h4>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{{ url('groups/create')}}" class="btn btn-info"><i class="fa fa-plus"></i> New Group</a>
+        </div>
+    </div>
+
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">User Groups</h6>
@@ -20,7 +31,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Action</th>
+                        <th class="text-right">Action</th>
                     </tr>
                 </thead>
 
@@ -29,11 +40,14 @@
                     <tr>
                         <td>{{$group->id}}</td>
                         <td>{{$group->title}}</td>
-                        <td><a href="" class="btn btn-danger">Delete</a></td>
-
+                        <td class="text-right">
+                            <form action="{{ url('groups/' . $group->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                            </form>
                     </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
