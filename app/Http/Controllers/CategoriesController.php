@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Models\User;
-use App\Models\Group;
+use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class UsersController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +17,10 @@ class UsersController extends Controller
     public function index()
     {
         $data = [
-            'users' => User::all(),
-
+            'categories' => Category::all()
         ];
-        return view('users.index', $data);
+
+        return view('category.categories', $data);
     }
 
     /**
@@ -32,8 +30,12 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $data['groups'] = Group::select('id', 'title')->orderBy('title', 'asc')->get();
-        return view('users.create', $data);
+        $data = [
+            'headline' => 'Add New Category',
+            'mode' => 'create'
+        ];
+
+        return view('category.form', $data);
     }
 
     /**
@@ -42,14 +44,15 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(CategoryRequest $request)
     {
         $formData = $request->all();
-        if (User::create($formData)) {
-            Session::flash('message', 'User Created Successfully');
-        };
 
-        return redirect()->to('users');
+        if (Category::create($formData)) {
+            Session::flash('message', $formData['title'] . 'Added Successfully');
+        }
+
+        return redirect()->to('categories');
     }
 
     /**
@@ -60,11 +63,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $data = [
-            'user' => User::find($id)
-        ];
-
-        return view('users.show', $data);
+        //
     }
 
     /**
@@ -76,10 +75,12 @@ class UsersController extends Controller
     public function edit($id)
     {
         $data = [
-            'groups' => Group::get(['id', 'title']),
-            'user' => User::findOrFail($id)
+            'category' => Category::findOrFail($id),
+            'mode' => 'edit',
+            'headline' => 'Update Data'
         ];
-        return view('users.edit', $data);
+
+        return view('category.form', $data);
     }
 
     /**
@@ -89,21 +90,17 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $formRequest = $request->only([
-            'group_id',
-            'name',
-            'email',
-            'phone',
-            'address',
+            'title'
         ]);
 
-        if (User::where('id', $id)->update($formRequest)) {
-            Session::flash('message', 'User Updated Successfully');
-        };
+        if (Category::where('id', $id)->update($formRequest)) {
+            Session::flash('message', 'Category Updated Successfully');
+        }
 
-        return redirect()->to('users');
+        return redirect()->to('categories');
     }
 
     /**
@@ -114,10 +111,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        if (User::find($id)->delete()) {
-            Session::flash('message', 'User Deleted Successfully');
-        };
+        if (Category::find($id)->delete()) {
+            Session::flash('message', 'Category Deleted Successfully');
+        }
 
-        return redirect()->to('users');
+        return redirect()->to('categories');
     }
 }
