@@ -71,6 +71,9 @@
                         <td>{{$user->created_at}}</td>
                         <td>{{$user->updated_at}}</td>
                         <td colspan="2" class="text-right">
+                            <a class="btn btn-primary btn-sm" href="{{ route('users.show', ['user' => $user->id]) }}">
+                                <i class="fa fa-eye"></i>
+                           </a>
                             <a class="btn btn-sm btn-primary" href="{{ route('users.edit', ['user' => $user->id])}}"><i class="fas fa-edit"></i></a>
                             <form action="{{ route('users.destroy', ['user' => $user->id])}}" method="POST">
                             @csrf
