@@ -61,7 +61,9 @@ class UsersController extends Controller
     public function show($id)
     {
         $data = [
-            'user' => User::find($id)
+            'user' => User::find($id),
+            'tab_menu' => 'user_info',
+
         ];
 
         return view('users.show', $data);
@@ -99,7 +101,7 @@ class UsersController extends Controller
             'address',
         ]);
 
-        if (User::where('id', $id)->update($formRequest)) {
+        if (User::with('groups')->where('id', $id)->update($formRequest)) {
             Session::flash('message', 'User Updated Successfully');
         };
 

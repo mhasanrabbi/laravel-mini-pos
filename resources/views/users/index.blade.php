@@ -2,25 +2,14 @@
 
 @section('content')
 
-@extends('layout.index')
-
-@push('styles')
-<!-- Custom styles for this page -->
-<link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-@endpush
-
-
-@section('content')
-
-
-    <div class="row clearfix page__header">
-        <div class="col-md-6">
-            <h4>User List</h4>
-        </div>
-        <div class="col-md-6 text-right">
-            <a href="{{ url('users/create')}}" class="btn btn-info"><i class="fa fa-plus"></i> New User</a>
-        </div>
+<div class="row clearfix page__header">
+    <div class="col-md-6">
+        <h4>User List</h4>
     </div>
+    <div class="col-md-6 text-right">
+        <a href="{{ url('users/create')}}" class="btn btn-info"><i class="fa fa-plus"></i> New User</a>
+    </div>
+</div>
 
 
 <div class="card shadow mb-4">
@@ -73,12 +62,14 @@
                         <td colspan="2" class="text-right">
                             <a class="btn btn-primary btn-sm" href="{{ route('users.show', ['user' => $user->id]) }}">
                                 <i class="fa fa-eye"></i>
-                           </a>
-                            <a class="btn btn-sm btn-primary" href="{{ route('users.edit', ['user' => $user->id])}}"><i class="fas fa-edit"></i></a>
+                            </a>
+                            <a class="btn btn-sm btn-primary" href="{{ route('users.edit', ['user' => $user->id])}}"><i
+                                    class="fas fa-edit"></i></a>
                             <form action="{{ route('users.destroy', ['user' => $user->id])}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="return confirm('Are you sure?')" type="submit"
+                                    class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </form>
                     </tr>
                     @endforeach
@@ -87,16 +78,5 @@
         </div>
     </div>
 </div>
-
-@endsection
-
-@push('scripts')
-<!-- Page level plugins -->
-<script src="{{asset('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-<!-- Page level custom scripts -->
-<script src="{{asset('assets/js/demo/datatables-demo.js')}}"></script>
-@endpush
-
 
 @endsection
