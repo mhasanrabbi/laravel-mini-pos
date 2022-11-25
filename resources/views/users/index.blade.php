@@ -60,16 +60,26 @@
                         <td>{{$user->created_at}}</td>
                         <td>{{$user->updated_at}}</td>
                         <td colspan="2" class="text-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('users.show', ['user' => $user->id]) }}">
-                                <i class="fa fa-eye"></i>
-                            </a>
-                            <a class="btn btn-sm btn-primary" href="{{ route('users.edit', ['user' => $user->id])}}"><i
-                                    class="fas fa-edit"></i></a>
+
                             <form action="{{ route('users.destroy', ['user' => $user->id])}}" method="POST">
+                                <a class="btn btn-primary btn-sm"
+                                    href="{{ route('users.show', ['user' => $user->id]) }}">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-sm btn-primary"
+                                    href="{{ route('users.edit', ['user' => $user->id])}}"><i
+                                        class="fas fa-edit"></i></a>
+                                @if(
+                                $user->sales()->count() == 0
+                                && $user->purchases()->count() == 0
+                                && $user->receipts()->count() == 0
+                                && $user->payments()->count() == 0
+                                )
                                 @csrf
                                 @method('DELETE')
                                 <button onclick="return confirm('Are you sure?')" type="submit"
                                     class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                @endif
                             </form>
                     </tr>
                     @endforeach
