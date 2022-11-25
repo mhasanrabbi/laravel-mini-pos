@@ -53,7 +53,7 @@
                                         href="{{ route('user.sales.invoice_details', ['id' => $user->id, 'invoice_id' => $sale->id]) }}">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    @if($itemQty >  0)
+                                    @if($itemQty ==  0)
                                     @csrf
                                     @method('DELETE')
                                     <button onclick="return confirm('Are you sure?')" type="submit"
