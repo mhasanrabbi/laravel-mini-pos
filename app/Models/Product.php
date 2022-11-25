@@ -17,4 +17,15 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public static function arrayForSelect()
+    {
+        $arr = [];
+        $products = Product::all();
+        foreach ($products as $product) {
+            $arr[$product->id] = $product->title;
+        }
+
+        return $arr;
+    }
 }
