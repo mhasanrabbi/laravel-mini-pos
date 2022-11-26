@@ -9,5 +9,10 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'amount', 'note', 'user_id'];
+    protected $fillable = ['date', 'amount', 'note', 'user_id', 'admin_id', 'purchase_invoice_id'];
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 }

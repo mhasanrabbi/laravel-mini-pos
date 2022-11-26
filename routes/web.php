@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('users', UsersController::class);
 
+    # Route for Sales and Invoices
     Route::get('users/{id}/sales', [UserSalesController::class, 'index'])->name('user.sales');
     Route::post('users/{id}/invoices', [UserSalesController::class, 'createInvoice'])->name('user.sales.store');
 
@@ -41,18 +42,30 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/{id}/invoices/{invoice_id}', [UserSalesController::class, 'addItem'])->name('user.sales.invoices.add_item');
     Route::delete('users/{id}/invoices/{invoice_id}/{item_id}', [UserSalesController::class, 'destroyItem'])->name('user.sales.invoices.delete_item');
 
-
+    #Route for Purchases
     Route::get('users/{id}/purchases', [UserPurchasesController::class, 'index'])->name('user.purchases');
+    Route::post('users/{id}/purchases', [UserPurchasesController::class, 'createInvoice'])->name('user.purchases.store');
+    Route::get('users/{id}/purchases/{invoice_id}', [UserPurchasesController::class, 'invoice'])->name('user.purchases.invoice_details');
+    Route::delete('users/{id}/purchases/{invoice_id}', [UserPurchasesController::class, 'destroy'])->name('user.purchases.destroy');
+    Route::post('users/{id}/purchases/{invoice_id}', [UserPurchasesController::class, 'addItem'])->name('user.purchases.add_item');
+    Route::delete('users/{id}/purchases/{invoice_id}/{item_id}', [UserPurchasesController::class, 'index'])->name('user.purchases.delete_item');
 
+
+
+
+    # Route for Payments
     Route::get('users/{id}/payments', [UserPaymentsController::class, 'index'])->name('user.payments');
-    Route::post('users/{id}/payments', [UserPaymentsController::class, 'store'])->name('user.payments.store');
+    Route::post('users/{id}/payments/{invoice_id?}', [UserPaymentsController::class, 'store'])->name('user.payments.store');
     Route::delete('users/{id}/payments/{payment_id}', [UserPaymentsController::class, 'destroy'])->name('user.payments.destroy');
 
+    # Route for receipts
     Route::get('users/{id}/receipts', [UserReceiptsController::class, 'index'])->name('user.receipts');
     Route::post('users/{id}/receipts/{invoice_id?}', [UserReceiptsController::class, 'store'])->name('user.receipts.store');
     Route::delete('users/{id}/receipts/{receipt_id}', [UserReceiptsController::class, 'destroy'])->name('user.receipts.destroy');
 
+    #Route for Categories
     Route::resource('categories', CategoriesController::class, ['except' => 'show']);
 
+    # Route for Products
     Route::resource('products', ProductsController::class);
 });
