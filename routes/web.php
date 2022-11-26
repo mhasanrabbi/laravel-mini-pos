@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserSalesController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserGroupsController;
 use App\Http\Controllers\UserPaymentsController;
 use App\Http\Controllers\UserReceiptsController;
@@ -16,18 +17,14 @@ use App\Http\Controllers\Reports\ReceiptReportController;
 use App\Http\Controllers\Reports\PurchaseReportController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('login', 'App\Http\Controllers\Auth\LoginController@login')->name('login');
 Route::post('login', 'App\Http\Controllers\Auth\LoginController@authenticate')->name('login.confirm');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('dashboard', function () {
-        return view('welcome');
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
