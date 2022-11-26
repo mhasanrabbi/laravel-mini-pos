@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InvoiceProductRequest;
+use App\Http\Requests\InvoiceRequest;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\SaleItem;
@@ -23,7 +24,7 @@ class UserSalesController extends Controller
         return view('users.sales.sales', $data);
     }
 
-    public function createInvoice(InvoiceProductRequest $request, $user_id)
+    public function createInvoice(InvoiceRequest $request, $user_id)
     {
         $formData = $request->all();
         $formData['user_id'] = $user_id;
@@ -31,7 +32,7 @@ class UserSalesController extends Controller
 
         $invoice = SaleInvoice::create($formData);
 
-        return redirect()->route('users.sales.invoice_details', ['id' => $user_id, 'invoice_id' => $invoice->id]);
+        return redirect()->route('user.sales.invoice_details', ['id' => $user_id, 'invoice_id' => $invoice->id]);
     }
 
     public function invoice($user_id, $invoice_id)
