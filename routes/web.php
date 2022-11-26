@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\Reports\SaleReportController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Reports\PurchaseReportController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserSalesController;
@@ -12,6 +10,10 @@ use App\Http\Controllers\UserPaymentsController;
 use App\Http\Controllers\UserReceiptsController;
 use App\Http\Controllers\ProductsStockController;
 use App\Http\Controllers\UserPurchasesController;
+use App\Http\Controllers\Reports\SaleReportController;
+use App\Http\Controllers\Reports\PaymentReportController;
+use App\Http\Controllers\Reports\ReceiptReportController;
+use App\Http\Controllers\Reports\PurchaseReportController;
 
 
 Route::get('/', function () {
@@ -75,4 +77,6 @@ Route::group(['middleware' => 'auth'], function () {
     #Route for Sales and Purchases Reports
     Route::get('reports/sales', [SaleReportController::class, 'index'])->name('reports.sales');
     Route::get('reports/purchases', [PurchaseReportController::class, 'index'])->name('reports.purchases');
+    Route::get('reports/payments', [PaymentReportController::class, 'index'])->name('reports.payments');
+    Route::get('reports/receipts', [ReceiptReportController::class, 'index'])->name('reports.receipts');
 });
