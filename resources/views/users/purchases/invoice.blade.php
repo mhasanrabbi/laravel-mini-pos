@@ -112,9 +112,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="price" class="col-sm-3 col-form-label  text-right">Unite Price <span class="text-danger">*</span> </label>
+                    <label for="price" class="col-sm-3 col-form-label  text-right">Unit Price <span class="text-danger">*</span> </label>
                     <div class="col-sm-9">
-                          {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price', 'placeholder' => 'Unite Price', 'required' ]) }}
+                          {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price', 'placeholder' => 'Unit Price', 'required' ]) }}
                     </div>
                 </div>
 

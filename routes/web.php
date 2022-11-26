@@ -5,6 +5,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserSalesController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsStockController;
 use App\Http\Controllers\UserGroupsController;
 use App\Http\Controllers\UserPaymentsController;
 use App\Http\Controllers\UserReceiptsController;
@@ -50,9 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/{id}/purchases/{invoice_id}', [UserPurchasesController::class, 'addItem'])->name('user.purchases.add_item');
     Route::delete('users/{id}/purchases/{invoice_id}/{item_id}', [UserPurchasesController::class, 'index'])->name('user.purchases.delete_item');
 
-
-
-
     # Route for Payments
     Route::get('users/{id}/payments', [UserPaymentsController::class, 'index'])->name('user.payments');
     Route::post('users/{id}/payments/{invoice_id?}', [UserPaymentsController::class, 'store'])->name('user.payments.store');
@@ -68,4 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     # Route for Products
     Route::resource('products', ProductsController::class);
+
+    # Route for Product Stock
+    Route::get('stocks', [ProductsStockController::class, 'index'])->name('stocks');
 });
