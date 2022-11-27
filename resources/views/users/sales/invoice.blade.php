@@ -117,7 +117,7 @@
                     <label for="price" class="col-sm-3 col-form-label text-right">Unit Price<span
                             class="text-danger">*</span> </label>
                     <div class="col-sm-9">
-                        {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price', 'placeholder' => 'Unit Price', 'required' ]) }}
+                        {{ Form::text('price', NULL, [ 'class'=>'form-control', 'id' => 'price', 'placeholder' => 'Unit Price', 'onkeyup' => 'getTotal()', 'required' ]) }}
                     </div>
                 </div>
 
@@ -125,7 +125,7 @@
                     <label for="quantity" class="col-sm-3 col-form-label  text-right">Quantity <span
                             class="text-danger">*</span> </label>
                     <div class="col-sm-9">
-                        {{ Form::text('quantity', NULL, [ 'class'=>'form-control', 'id' => 'quantity', 'placeholder' =>
+                        {{ Form::text('quantity', NULL, [ 'class'=>'form-control', 'id' => 'quantity', 'onkeyup' => 'getTotal()', 'placeholder' =>
                         'Quantity', 'required' ]) }}
                     </div>
                 </div>
@@ -199,4 +199,18 @@
         {!! Form::close() !!}
     </div>
 </div>
+
+<script type="text/javascript">
+function getTotal() {
+    var price = document.getElementById("price").value;
+    var quantity = document.getElementById("quantity").value;
+    if(price && quantity) {
+        var total = price* quantity;
+        document.getElementById("total").value = total;
+    }
+}
+</script>
+
 @endsection
+
+
