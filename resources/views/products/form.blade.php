@@ -49,6 +49,13 @@
                   </div>
 
                   <div class="form-group row">
+                    <label for="name" class="col-sm-2 text-right col-form-label">Has Stock <span class="text-danger">*</span> </label>
+                    <div class="col-sm-5">
+                      {{ Form::select('has_stock', ['1' => 'Yes', '0' => 'No'], NULL, [ 'class'=>'form-control', 'id' => 'group' ]) }}
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
                     <label for="name" class="col-sm-2 text-right col-form-label">Category <span class="text-danger">*</span> </label>
                     <div class="col-sm-5">
                       {{ Form::select('category_id', $categories, NULL, [ 'class'=>'form-control', 'id' => 'group', 'placeholder' => 'Select Category' ]) }}

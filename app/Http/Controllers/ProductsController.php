@@ -104,6 +104,7 @@ class ProductsController extends Controller
             'title',
             'description',
             'cost_price',
+            'has_stock'
         ]);
 
         if (Product::with('category')->where('id', $id)->update($formRequest)) {

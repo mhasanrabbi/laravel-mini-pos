@@ -78,27 +78,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{('categories')}}">Categories</a>
+                        <a class="collapse-item" href="{{url('categories')}}">Categories</a>
                         <a class="collapse-item" href="{{ url('products')}}">Products</a>
                         <a class="collapse-item" href="{{ route('stocks')}}">Stocks</a>
                     </div>
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Sales</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('categories.index')}}">Categories</a>
-                        <a class="collapse-item" href="{{ url('products')}}">Products</a>
-                        <a class="collapse-item" href="{{ route('stocks')}}">Stocks</a>
-                    </div>
-                </div>
-            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                     aria-expanded="true" aria-controls="collapseFour">
