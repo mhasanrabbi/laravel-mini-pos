@@ -33,6 +33,7 @@
               <th>Title</th>
               <th>Cost Price</th>
               <th>Sale Price</th>
+              <th>Has Stock</th>
               <th class="text-right">Actions</th>
             </tr>
           </thead>
@@ -43,6 +44,7 @@
               <th>Title</th>
               <th>Cost Price</th>
               <th>Sale Price</th>
+              <th>Has Stock</th>
               <th class="text-right">Actions</th>
             </tr>
           </tfoot>
@@ -54,6 +56,7 @@
                   <td> {{ $product->title }} </td>
                   <td> {{ $product->cost_price }} </td>
                   <td> {{ $product->price }} </td>
+                  <td> {{ ($product->has_stock == 1 ) ? 'Yes' : 'No' }} </td>
                   <td class="text-right">
 
                       <form method="POST" action=" {{ route('products.destroy', ['product' => $product->id]) }} ">
