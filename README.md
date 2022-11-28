@@ -22,7 +22,7 @@ $ composer install
 ```
 ### Generate APP_KEY 
 ``` 
-$ composer artisan key:generate
+$ php artisan key:generate
 ```
 
 ### Change below credentials with your own config in `.env`
