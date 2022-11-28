@@ -16,13 +16,13 @@ class DashboardController extends Controller
     {
 
         $data = [
-            'totalUsers' => User::count('id'),
-            'totalProducts' => Product::count('id'),
-            'totalSales' => SaleItem::sum('total'),
-            'totalPurchases' => PurchaseItem::sum('total'),
-            'totalReceipts' => Receipt::sum('amount'),
-            'totalPayments' => Payment::sum('amount'),
-            'totalStock' => PurchaseItem::sum('quantity') - SaleItem::sum('quantity'),
+            'totalUsers' => User::lazy()->count('id'),
+            'totalProducts' => Product::lazy()->count('id'),
+            'totalSales' => SaleItem::lazy()->sum('total'),
+            'totalPurchases' => PurchaseItem::lazy()->sum('total'),
+            'totalReceipts' => Receipt::lazy()->sum('amount'),
+            'totalPayments' => Payment::lazy()->sum('amount'),
+            'totalStock' => PurchaseItem::lazy()->sum('quantity') - SaleItem::lazy()->sum('quantity'),
         ];
 
         return view('dashboard', $data);
